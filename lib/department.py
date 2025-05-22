@@ -1,6 +1,7 @@
 from __init__ import CURSOR, CONN
 
 
+
 class Department:
 
     def __init__(self, name, location, id=None):
@@ -23,13 +24,27 @@ class Department:
         """
         CURSOR.execute(sql)
         CONN.commit()
+        
+        
     
     @classmethod
     def drop_table(cls):
         """Drop the table that persists Department instances"""
-        sql = "DROP TABLE IF EXISTS departments;"
+        sql = """
+          DROP TABLE IF EXISTS departments;
+        """""
         CURSOR.execute(sql)
         CONN.commit()
+
+
+    @classmethod
+    
+    def create(cls, name, location):
+      """Initialize a new Department instance and save the object to the database"""
+       
+      department = cls(name=name, location=location)
+      department.save()
+      return department
 
     def save(self):
         """Insert a new row and update the object's id attribute"""
